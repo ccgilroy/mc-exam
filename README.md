@@ -1,6 +1,8 @@
 # Multiple Choice Exam Parser
 
-This repo generates multiple choice exams formatted with numbered questions and lettered answer choices, with both question order and answer order randomized, from a YAML file of questions and answers.
+This repo generates multiple choice exams from a YAML file of questions and answers.
+
+The questions are automatically formatted with numbered questions and lettered answer choices, and both question order (optional) and answer order are randomized. In addition, the parser generates long and short versions of an answer key that can also be printed. 
 
 ## Background and Inspiration
 
@@ -14,7 +16,7 @@ Alternatives considered: the [GIFT format](https://docs.moodle.org/31/en/GIFT_fo
 
 `parse_questions.R` contains the main function, `parse_questions()`, as well as a few helper functions for randomization and formatting.
 
-`example_exam_*_version.Rmd` shows how to read in the YAML file using the `yaml` package and chain the functions together to produces an exam or answer key document.
+`example_exam_*_version.Rmd` shows how to read in the YAML file using the `yaml` package and chain the functions together to produce an exam or answer key document.
 
 `example_questions.yml` illustrates the permissible variations on the question format.
 
@@ -26,7 +28,7 @@ I have used these scripts to produce exams for a course I TA at the University o
 
 My workflow is as follows: I generate separate pdfs for the exam, the exam with answers shown, and the short answer key, using `set.seed()` to keep the three consistent. I produce two alternate versions of the exam by setting different initial seeds.
 
-Feel free to copy, modify, or otherwise make use of this code! (Preferably with attribution---I've used an MIT license to encourage reuse.)
+Feel free to copy, modify, or otherwise make use of this code! (Preferably with attribution&mdash;I've used an MIT license to encourage reuse.)
 
 ## TODO
 
