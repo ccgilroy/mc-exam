@@ -18,7 +18,7 @@ Alternatives considered: the [GIFT format](https://docs.moodle.org/31/en/GIFT_fo
 
 `example_questions.yml` illustrates the permissible variations on the question format.
 
-`example_exam_html_version.md` is an example of the output.
+`example_exam_html_version.md` is an example of the output, but it needs Pandoc Markdown (not GitHub-flavored Markdown) to render lettered lists properly. See the [final html version](https://ccgilroy.github.io/mc-exam/example_exam_html_version.html), hosted on GitHub Pages.
 
 ## Usage
 
