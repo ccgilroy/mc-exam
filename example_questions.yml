@@ -1,0 +1,23 @@
+# Example questions in YAML format
+# Questions can have any number of incorrect answers
+# True/False questions are not randomized, but ordered "True", "False"
+# Most strings do not need to be in quotes, but some do (e.g. "True",
+# or anything with a colon)
+# Null correct answers will give a parsing error
+-
+    question: What's this answer to this question?
+    incorrect:
+        - Nope
+        - Not this one
+        - Still wrong
+    correct: Bingo!
+-
+    question: How about this?
+    incorrect:
+        - Sure, why not?
+    correct: How about no.
+-
+    question: True or false? This statement is false.
+    # paradoxes are fun
+    incorrect: "True"
+    correct: "False"

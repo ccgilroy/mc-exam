@@ -1,0 +1,46 @@
+---
+title: "Example Exam"
+subtitle: "Course Name"
+author: "Connor Gilroy"
+date: "`r Sys.Date()`"
+output: 
+  pdf_document: 
+    latex_engine: xelatex
+fontsize: 12pt
+mainfont: "Gentium Basic"
+---
+
+```{r setup, include=FALSE}
+library(yaml)
+library(stringr)
+library(dplyr)
+source("parse_questions.R")
+exam_questions <- yaml.load_file("example_questions.yml")
+set.seed(1)
+exam_questions_df <- 
+  exam_questions %>%
+  randomize_questions() %>%
+  parse_questions() 
+```
+
+# Exam questions
+
+```{r, echo=FALSE, results='asis'}
+print_questions(exam_questions_df)
+```
+
+\newpage
+
+# Exam questions with answers bolded
+
+```{r, echo=FALSE, results='asis'}
+print_answer_key_long(exam_questions_df)
+```
+
+\newpage
+
+# Answer key
+
+```{r, echo=FALSE, results='asis'}
+print_answer_key_short(exam_questions_df)
+```
