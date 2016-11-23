@@ -29,7 +29,12 @@ parse_questions <- function(questions, seed = NULL) {
     exam_string <- str_c(question_string, answer_string, sep = "  \n")
     
     ## generate answer key 
-    correct_answer_index <- which(str_detect(answer_strings, correct))
+    correct_answer_index <- 
+      which(str_detect(answer_strings, str_c("\t[a-z]\\. ", correct, "$")))
+    
+    if (length(correct_answer_index) > 1) {
+      stop("Error parsing correct answer. Too many correct answers.")
+    }
     
     ## long version
     ## bold the correct answer
@@ -44,8 +49,7 @@ parse_questions <- function(questions, seed = NULL) {
       str_c(question_string, answers_show_correct_string, sep = "  \n")
     
     ## short version
-    correct_answer_letter <- 
-      letters_to_use[which(str_detect(answer_strings, correct))]
+    correct_answer_letter <- letters_to_use[correct_answer_index]
     answer_key_short_string <- str_c(i, ". ", correct_answer_letter)
     
     ## for each question, return a list with three named components
