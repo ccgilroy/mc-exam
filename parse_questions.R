@@ -1,6 +1,7 @@
-parse_questions <- function(questions) {
+parse_questions <- function(questions, seed = NULL) {
   require(stringr)
   require(dplyr)
+  if (!is.null(seed)) set.seed(seed)
   lapply(seq_along(questions), function(i, questions) {
     ## pull question and answers from list of questions
     question <- questions[[i]]$question
@@ -76,6 +77,7 @@ print_answer_key_short <- function(parsed_questions) {
     cat()
 }
 
-randomize_questions <- function(questions) {
+randomize_questions <- function(questions, seed = NULL) {
+  if (!is.null(seed)) set.seed(seed)
   sample(questions, size = length(questions))
 }
