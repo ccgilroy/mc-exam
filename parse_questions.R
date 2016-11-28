@@ -1,7 +1,7 @@
 parse_questions <- function(questions, seed = NULL) {
   require(stringr)
   require(dplyr)
-  if (!is.null(seed)) set.seed(seed)
+  #  if (!is.null(seed)) set.seed(seed)
   lapply(seq_along(questions), function(i, questions) {
     ## pull question and answers from list of questions
     question <- questions[[i]]$question
@@ -9,6 +9,9 @@ parse_questions <- function(questions, seed = NULL) {
     correct <- questions[[i]]$correct
     
     ## randomize answers
+    ## set seed such that it is the same for a given question
+    ## regardless of where that question falls in the list of questions
+    if (!is.null(seed)) set.seed(seed*str_length(question))
     randomized_answers <- sample(answers, length(answers))
     
     ## don't randomize true-false questions
@@ -52,10 +55,14 @@ parse_questions <- function(questions, seed = NULL) {
     correct_answer_letter <- letters_to_use[correct_answer_index]
     answer_key_short_string <- str_c(i, ". ", correct_answer_letter)
     
-    ## for each question, return a list with three named components
+    ## for each question, return a list with five named components
+    ## returning the number and question makes it possible to 
+    ## match questions across versions of an exam
     list(exam = exam_string, 
          answer_key_long = answer_key_long_string, 
-         answer_key_short = answer_key_short_string)
+         answer_key_short = answer_key_short_string,
+         number = i, 
+         question = question)
   }, questions) %>% 
     bind_rows()  # convert to data frame and return
 }
